@@ -47,19 +47,6 @@ jobs:
       - name: List downloaded files (debugging)
         run: ls -R ./scanReport
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.x"
-
-      - name: Install dependencies
-        run: pip install reportlab
-
-      - name: Convert JSON to PDF
-        run: |
-          mkdir -p pdf-files
-          python scripts/json-to-pdf.py scanReport/Qualys_WAS_Scan_Result.json scanReport/PDFReport.pdf
-
       - name: Commit and push artifact
         run: |
           git config --global user.email "jyadav@qualys.com"
