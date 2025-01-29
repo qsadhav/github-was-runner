@@ -39,7 +39,7 @@ jobs:
           TIMEOUT: ${{ vars.TIMEOUT }}
 
       - name: Download Result
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v3
         with:
            name: Qualys_WAS_Scan_Result
            path: ./scanReport
