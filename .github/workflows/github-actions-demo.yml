@@ -42,27 +42,16 @@ jobs:
         uses: actions/download-artifact@v3
         with:
            name: Qualys_WAS_Scan_Result
-           path: ./scanReport
+           path: ./outputs
 
       - name: List downloaded files (debugging)
         run: ls -R ./outputs
 
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          repository: Qjyadav/github-was-runner
-          ref: main
-          path: ./
-          PAT: ${{ secrets.ACCESS_TOKEN }}
-          fetch-depth: 0
-
-      - name: List downloaded files (debugging)
-        run: ls -R ./scanReport
-
-      - name: Commit and push artifact
+      - name: Configure AWS CLI
         run: |
-          git add scanReport/*
-          git commit -m "Add downloaded artifact"
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws configure set default.region us-east-1
+
+      - name: Upload to S3
+        run: aws s3 cp ./outputs/Qualys_Wasscan_${{ vars.WEBAPP_ID }}.txt s3://${{ secrets.AWS_BUCKET_NAME }}/${{ vars.WEBAPP_ID }}_report.txt
