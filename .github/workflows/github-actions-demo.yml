@@ -6,7 +6,7 @@ jobs:
     name: Qualys WAS Scan
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: Qjyadav/github-was-runner
           ref: main
@@ -54,3 +54,5 @@ jobs:
           git add scanReport/*
           git commit -m "Add downloaded artifact"
           git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
