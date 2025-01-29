@@ -44,5 +44,8 @@ jobs:
            name: Qualys_WAS_Scan_Result
            path: ./outputs
 
-      - name: Push Artifact
-        run: ls ./outputs
+      - name: Commit and push artifact
+        run: |
+          git add outputs/*
+          git commit -m "Add downloaded artifact"
+          git push origin main
