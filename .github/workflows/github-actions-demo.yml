@@ -59,6 +59,8 @@ jobs:
 
       - name: Commit and push artifact
         run: |
+          git config --global user.email "jyadav@qualys.com"
+          git config --global user.name "Qjyadav"
           git add scanReport/*
           git commit -m "Add downloaded artifact"
           git push origin main
