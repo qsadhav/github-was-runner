@@ -38,8 +38,17 @@ jobs:
           INTERVAL: ${{ vars.INTERVAL }}
           TIMEOUT: ${{ vars.TIMEOUT }}
 
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: Qjyadav/github-was-runner
+          ref: main
+          path: ./
+          PAT: ${{ secrets.ACCESS_TOKEN }}
+          fetch-depth: 0
+
       - name: Download Result
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
            name: Qualys_WAS_Scan_Result
            path: ./scanReport
@@ -49,8 +58,6 @@ jobs:
 
       - name: Commit and push artifact
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add scanReport/*
           git commit -m "Add downloaded artifact"
           git push origin main
