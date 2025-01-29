@@ -8,6 +8,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
+          repository: Qjyadav/github-was-runner
+          ref: main
+          path: ./
+          PAT: ${{ secrets.ACCESS_TOKEN }}
           fetch-depth: 0
       
       - name: Qualys WAS scan action step
@@ -33,3 +37,12 @@ jobs:
           WAIT_FOR_RESULT: ${{ vars.WAIT_FOR_RESULT }}
           INTERVAL: ${{ vars.INTERVAL }}
           TIMEOUT: ${{ vars.TIMEOUT }}
+
+      - name: Download Result
+        uses: actions/download-artifact@v3
+        with:
+           name: Qualys_WAS_Scan_Result
+           path: ./outputs
+
+      - name: Push Artifact
+        run: ls ./outputs
