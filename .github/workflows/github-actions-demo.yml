@@ -44,6 +44,9 @@ jobs:
            name: Qualys_WAS_Scan_Result
            path: ./scanReport
 
+      - name: List downloaded files (debugging)
+        run: ls -R ./scanReport
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
