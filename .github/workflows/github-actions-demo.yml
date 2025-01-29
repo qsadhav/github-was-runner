@@ -42,10 +42,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
            name: Qualys_WAS_Scan_Result
-           path: ./outputs
+           path: ./scanReport
 
       - name: Commit and push artifact
         run: |
-          git add outputs/*
+          git add scanReport/*
           git commit -m "Add downloaded artifact"
           git push origin main
