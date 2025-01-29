@@ -38,6 +38,15 @@ jobs:
           INTERVAL: ${{ vars.INTERVAL }}
           TIMEOUT: ${{ vars.TIMEOUT }}
 
+      - name: Download Result
+        uses: actions/download-artifact@v4
+        with:
+           name: Qualys_WAS_Scan_Result
+           path: ./scanReport
+
+      - name: List downloaded files (debugging)
+        run: ls -R ./outputs
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -46,12 +55,6 @@ jobs:
           path: ./
           PAT: ${{ secrets.ACCESS_TOKEN }}
           fetch-depth: 0
-
-      - name: Download Result
-        uses: actions/download-artifact@v4
-        with:
-           name: Qualys_WAS_Scan_Result
-           path: ./scanReport
 
       - name: List downloaded files (debugging)
         run: ls -R ./scanReport
