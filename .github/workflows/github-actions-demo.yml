@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
       
       - name: Qualys WAS scan action step
-        uses: Qualys/github-action-qwas@v1.0.1
+        uses: Qualys/github-action-qwas@v1.1.0
         id: was
         with:
           API_SERVER: ${{ vars.API_SERVER }}
@@ -37,9 +37,10 @@ jobs:
           WAIT_FOR_RESULT: ${{ vars.WAIT_FOR_RESULT }}
           INTERVAL: ${{ vars.INTERVAL }}
           TIMEOUT: ${{ vars.TIMEOUT }}
+          FILE_TYPE: ${{ vars.FILE_TYPE }}
 
       - name: Download Result
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
            name: Qualys_WAS_Scan_Result
            path: ./outputs
