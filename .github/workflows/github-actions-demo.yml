@@ -6,7 +6,7 @@ jobs:
     name: Qualys WAS Scan
     steps:
       - name: Qualys WAS scan action step
-        uses: Qualys/github-action-qwas@v1.1.0
+        uses: Qualys/github-action-qwas@v1.1.0-alpha-3
         id: was
         with:
           API_SERVER: ${{ vars.API_SERVER }}
