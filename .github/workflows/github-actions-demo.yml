@@ -5,17 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Qualys WAS Scan
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          repository: Qjyadav/github-was-runner
-          ref: main
-          path: ./
-          PAT: ${{ secrets.ACCESS_TOKEN }}
-          fetch-depth: 0
-      
       - name: Qualys WAS scan action step
-        uses: Qualys/github-action-qwas@v1.1.0-alpha-2
+        uses: Qualys/github-action-qwas@v1.1.0
         id: was
         with:
           API_SERVER: ${{ vars.API_SERVER }}
